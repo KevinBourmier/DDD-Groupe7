@@ -17,7 +17,7 @@ public class SearchBilletTest {
 
 
     @Test
-    public void rechercher_should_return_two_billets(){
+    public void rechercher_should_return_one_billet(){
         ArrayList<Billet> result = this.billet.rechercher();
         assertEquals(result.size(), 1);
     }
@@ -27,7 +27,7 @@ public class SearchBilletTest {
         //this.billet = new Billet();
         //this.billet.ajouterBillets(new Billet("testBillet", "KFJVUR", 200.50, "2021-06-21"));
 
-        this.billet = new Billet("testBillet2", "KFJVUR22", 200.50, "2021-06-21");
+        this.billet = new Billet("testBillet", "KFJVUR22", 200.50, "2021-06-21");
         this.billet.ajouterBillets(billet);
     }
 
