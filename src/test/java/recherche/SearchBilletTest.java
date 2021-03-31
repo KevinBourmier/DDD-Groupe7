@@ -24,12 +24,7 @@ public class SearchBilletTest {
 
     @Before
     public void init(){
-        this.billet = new Billet();
         this.billet.ajouterBillets(new Billet("testBillet", "KFJVUR", 200.50, "2021-06-21"));
-
-        this.billet =
-        this.billet = new Billet("testBillet2", "KFJVUR22", 200.50, "2021-06-21");
-        this.billet.ajouterBillets(billet);
     }
 
 }
