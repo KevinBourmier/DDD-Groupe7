@@ -7,10 +7,10 @@ public class Billet {
     private final String id;
     private final String reservation;
     private final Double price;
-    private final Date date;
+    private final String date;
     private final ArrayList<Billet> billets = new ArrayList<>();
 
-    public Billet(String id, String reservation, Double price, Date date ){
+    public Billet(String id, String reservation, Double price, String date ){
         this.id = id;
         this.reservation = reservation;
         this.price = price;
