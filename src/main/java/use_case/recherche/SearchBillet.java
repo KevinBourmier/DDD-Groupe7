@@ -11,9 +11,4 @@ public class SearchBillet {
     public SearchBillet(Billet billet) {
         this.billet = billet;
     }
-
-
-    public ArrayList<Billet> rechercher(Date date, String destination){
-        return billet.rechercher();
-    }
 }
