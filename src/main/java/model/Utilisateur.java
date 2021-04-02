@@ -9,6 +9,9 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String mail;
+
+
+
     private double compte_bancaire;
     private final ArrayList<Billet> billets;
 
@@ -50,5 +53,8 @@ public class Utilisateur {
                 .filter(billet -> billet.getId() == idBillet)
                 .findFirst()
                 .orElseThrow(()-> new Exception("Impossible de trouver le billet"));
+    }
+    public double getCompte_bancaire() {
+        return compte_bancaire;
     }
 }

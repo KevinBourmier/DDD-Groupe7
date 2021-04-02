@@ -32,6 +32,7 @@ public class RembourserTest {
 
         rembourser.effectuerRemboursement(billet.getId(), utilisateur);
         assertEquals(billet.getStatut(), 3);
+        assertEquals(utilisateur.getCompte_bancaire(), 4000 + 300.6, 1);
     }
 
     @Test
