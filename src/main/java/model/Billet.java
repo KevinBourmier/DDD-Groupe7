@@ -4,7 +4,7 @@ import use_case.assurance.RemboursementImpossible;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import java.util.UUID;
 
 
 public class Billet {
@@ -15,7 +15,13 @@ public class Billet {
     private final Boolean assurance;
     private final LocalDate dateAchat;
     private Boolean remboursement;
-    private final ArrayList<Billet> billets = new ArrayList<>();
+
+    public int getStatut() {
+        return statut;
+    }
+
+    private int statut;
+    public static final int DAYS_TO_SUBSTRACT = 30;
 
     public void setRemboursement(Boolean remboursement) {
         this.remboursement = remboursement;
@@ -52,8 +58,8 @@ public class Billet {
 
 
 
-    public Billet(String id, String reservation, Double price, LocalDate date, Boolean assurance, LocalDate dateAchat){
-        this.id = id;
+    public Billet(String reservation, Double price, LocalDate date, Boolean assurance, LocalDate dateAchat){
+        this.id = UUID.randomUUID().toString();
         this.reservation = reservation;
         this.price = price;
         this.date = date;
@@ -63,22 +69,26 @@ public class Billet {
     }
 
 
-    public static void EstRemboursable(Billet billet)throws RemboursementImpossible {
+    public void rembourser(Utilisateur utilisateur)throws RemboursementImpossible {
         LocalDate dateAujourdhui = LocalDate.now();
-        LocalDate verification30jours = dateAujourdhui.minusDays(30);
+        LocalDate verification30jours = dateAujourdhui.minusDays(DAYS_TO_SUBSTRACT);
 
-        if(!billet.getAssurance()){
+        if(!this.getAssurance()){
             throw new RemboursementImpossible("Le billet ne contient pas d'assurance");
         }
-        if(billet.getDate().isBefore(LocalDate.now())){
+        if(this.getDate().isBefore(LocalDate.now())){
             throw new RemboursementImpossible("Le vol est déjà passé");
         }
-        if(billet.getDateAchat().isBefore(verification30jours)){
+        if(this.getDateAchat().isBefore(verification30jours)){
             throw new RemboursementImpossible("Le billet a dépassé les 30 jours assurés");
         }
 
-        billet.setRemboursement(true);
+        this.annulerBillet();
+        utilisateur.rembourser(this.price);
     }
 
+    public void annulerBillet() {
+        this.statut = 3;
+    }
 
 }
