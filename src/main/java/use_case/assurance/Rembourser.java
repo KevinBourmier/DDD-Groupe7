@@ -17,6 +17,7 @@ public class Rembourser {
     // Vérifier que le vol n'est pas passé
     // Vérifier que le billet est acheté sous 30 jours
     public void effectuerRemboursement(Billet billet) throws RemboursementImpossible {
+        /*
         LocalDate dateAujourdhui = LocalDate.now();
         LocalDate verification30jours = dateAujourdhui.minusDays(30);
 
@@ -31,6 +32,11 @@ public class Rembourser {
         }
 
         billet.setRemboursement(true);
+
+
+         */
+
+        Billet.EstRemboursable(billet);
     }
 
 }

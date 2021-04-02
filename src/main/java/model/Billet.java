@@ -1,7 +1,11 @@
 package model;
 
+import use_case.assurance.RemboursementImpossible;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+
 
 public class Billet {
     private final String id;
@@ -56,6 +60,24 @@ public class Billet {
         this.assurance = assurance;
         this.dateAchat = dateAchat;
         this.remboursement = false;
+    }
+
+
+    public static void EstRemboursable(Billet billet)throws RemboursementImpossible {
+        LocalDate dateAujourdhui = LocalDate.now();
+        LocalDate verification30jours = dateAujourdhui.minusDays(30);
+
+        if(!billet.getAssurance()){
+            throw new RemboursementImpossible("Le billet ne contient pas d'assurance");
+        }
+        if(billet.getDate().isBefore(LocalDate.now())){
+            throw new RemboursementImpossible("Le vol est déjà passé");
+        }
+        if(billet.getDateAchat().isBefore(verification30jours)){
+            throw new RemboursementImpossible("Le billet a dépassé les 30 jours assurés");
+        }
+
+        billet.setRemboursement(true);
     }
 
 
